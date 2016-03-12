@@ -9,4 +9,3 @@
 
 * Use inheritance
 * Use array for tags
-* Use constraint for down votes and up votes

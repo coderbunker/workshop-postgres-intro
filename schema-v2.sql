@@ -1,4 +1,3 @@
-create extension if not exists pgcrypto;
 
 begin;
   create schema if not exists stacko_v2;

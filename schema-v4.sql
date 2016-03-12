@@ -1,6 +1,7 @@
-create extension if not exists pgcrypto;
 
 begin;
+  create extension if not exists pgcrypto;
+
   create schema if not exists stacko_v4;
 
   create table if not exists stacko_v4.users (
@@ -87,14 +88,24 @@ begin;
   create trigger answers_update_time_on_update before update on stacko_v4.answers
     for each row execute procedure stacko_v4.set_update_time();
 
-  -- init triggers for stacko_v4.comments table
-  drop trigger if exists comments_creation_time_on_insert on stacko_v4.comments;
-  create trigger comments_creation_time_on_insert before insert on stacko_v4.comments
+  -- init triggers for stacko_v4.comments_on_questions table
+  drop trigger if exists comments_creation_time_on_insert on stacko_v4.comments_on_questions;
+  create trigger comments_creation_time_on_insert before insert on stacko_v4.comments_on_questions
     for each row execute procedure stacko_v4.set_creation_time();
 
-  drop trigger if exists comments_update_time_on_update on stacko_v4.questions;
-  create trigger comments_update_time_on_update before update on stacko_v4.comments
+  drop trigger if exists comments_update_time_on_update on stacko_v4.comments_on_questions;
+  create trigger comments_update_time_on_update before update on stacko_v4.comments_on_questions
     for each row execute procedure stacko_v4.set_update_time();
+
+  -- init triggers for stacko_v4.comments_on_answers table
+  drop trigger if exists comments_creation_time_on_insert on stacko_v4.comments_on_answers;
+  create trigger comments_creation_time_on_insert before insert on stacko_v4.comments_on_answers
+    for each row execute procedure stacko_v4.set_creation_time();
+
+  drop trigger if exists comments_update_time_on_update on stacko_v4.comments_on_answers;
+  create trigger comments_update_time_on_update before update on stacko_v4.comments_on_answers
+    for each row execute procedure stacko_v4.set_update_time();
+
 
   -- init triggers for stacko_v4.users table
   drop trigger if exists users_creation_time_on_insert on stacko_v4.users;
@@ -132,7 +143,7 @@ begin;
     end;
   $$ language plpgsql;
 
-  drop trigger if exists create_slug on stacko_v4.questions;
+  drop trigger if exists update_question_slug on stacko_v4.questions;
   create trigger update_question_slug before insert or update on stacko_v4.questions
     for each row execute procedure stacko_v4.update_question_slug();
 
