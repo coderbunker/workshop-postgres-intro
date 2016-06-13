@@ -14,6 +14,8 @@ BOT_NAME = 'stacko_parser'
 SPIDER_MODULES = ['stacko_parser.spiders']
 NEWSPIDER_MODULE = 'stacko_parser.spiders'
 
+#DATABASE_URL = 'postgres://ecquaulmtiuhlm:7tslT0pCMV5SG_tqflvPqxGsX5@ec2-54-83-198-159.compute-1.amazonaws.com:5432/d13tou9pthro19'
+DATABASE_URL = 'postgres://sylvain@localhost:5432/sylvain'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'stacko_parser (+http://www.yourdomain.com)'
@@ -62,6 +64,7 @@ NEWSPIDER_MODULE = 'stacko_parser.spiders'
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
+    'stacko_parser.pipelines.StackoParserPipeline': 300
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -77,7 +80,7 @@ ITEM_PIPELINES = {
 
 # Enable and configure HTTP caching (disabled by default)
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
-HTTPCACHE_ENABLED=True
+#HTTPCACHE_ENABLED=True
 #HTTPCACHE_EXPIRATION_SECS=0
 #HTTPCACHE_DIR='httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES=[]
