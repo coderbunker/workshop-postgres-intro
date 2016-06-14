@@ -14,8 +14,6 @@ BOT_NAME = 'stacko_parser'
 SPIDER_MODULES = ['stacko_parser.spiders']
 NEWSPIDER_MODULE = 'stacko_parser.spiders'
 
-#DATABASE_URL = 'postgres://ecquaulmtiuhlm:7tslT0pCMV5SG_tqflvPqxGsX5@ec2-54-83-198-159.compute-1.amazonaws.com:5432/d13tou9pthro19'
-DATABASE_URL = 'postgres://sylvain@localhost:5432/sylvain'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'stacko_parser (+http://www.yourdomain.com)'
