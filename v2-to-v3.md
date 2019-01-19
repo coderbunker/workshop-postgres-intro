@@ -1,6 +1,5 @@
 # How to go from v2 to v3
 
-* We want to add comments to BOTH questions AND answers
 * We want to add users
 * Store when record were created
 * We want to add automatic slug creation

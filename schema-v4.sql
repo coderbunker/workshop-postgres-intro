@@ -5,13 +5,14 @@ begin;
   create schema if not exists stacko_v4;
 
   create table if not exists stacko_v4.users (
-    id uuid primary key default gen_random_uuid(),
-    username character varying not null check (char_length(username) >= 5),
+    username character varying primary key,
 
     settings jsonb not null default '{}'::jsonb,
 
     created_at timestamp with time zone not null,
-    updated_at timestamp with time zone not null
+    updated_at timestamp with time zone not null,
+
+    CONSTRAINT username_length CHECK (char_length(username) >= 5)
   );
 
   create table if not exists stacko_v4.posts (
@@ -19,7 +20,7 @@ begin;
 
     vote smallint not null default 0,
 
-    owner_id uuid not null references stacko_v4.users(id),
+    owner_name character varying not null references stacko_v4.users(username),
 
     created_at timestamp with time zone not null,
     updated_at timestamp with time zone not null
@@ -121,7 +122,7 @@ begin;
     begin
       -- replaces underscores and spaces with dash
       return regexp_replace(
-        regexp_replace(lower(title), '[^a-z]', '-'),
+        regexp_replace(lower(title), '[^a-z0-9]', '-', 'M'),
         '[-]+', '-', 'g' -- remove ugly multiple -
       );
     end;

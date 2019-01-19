@@ -9,20 +9,20 @@ begin;
 
   create table if not exists stacko_v1.questions (
     id uuid primary key,
-    title character varying not null,
-    text text
+    title text not null,
+    text text not null
   );
 
   create table if not exists stacko_v1.answers (
     id uuid primary key,
-    question_id uuid REFERENCES stacko_v1.questions(id),
+    question_id uuid references stacko_v1.questions(id),
     text text
   );
 
   create table if not exists stacko_v1.question_tag (
-    question_id uuid REFERENCES stacko_v1.tags(id),
-    tag_id uuid REFERENCES stacko_v1.questions(id),
-    PRIMARY KEY (question_id, tag_id)
+    question_id uuid references stacko_v1.questions(id),
+    tag_id uuid references stacko_v1.tags(id),
+    primary key (question_id, tag_id)
   );
 
 commit;
